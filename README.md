@@ -1,0 +1,294 @@
+# quiz
+i got a problem in my code the .addeventlistener is not working in my code....so can anyone find the bug in the code
+
+<!DOCTYPE html>
+<style>
+    *{
+        background-color: rgb(54, 2, 102);
+        box-sizing: border-box;
+    }
+    body{
+        margin: 0;
+        width: auto;
+        height:100vh;
+    }
+    h1{
+        background-color: black;
+        color:antiquewhite;
+        margin-top: 0;
+        padding: 20px;
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    #score{
+        width: 30%;
+        height: 400px;
+        background-color: blueviolet;
+        margin-top: 0px;
+        border-radius: 5px 25px 25px 5px;
+        color:aliceblue;
+        font-family: 'Arial Narrow', Arial, sans-serif;
+        text-align: start;
+        
+    }
+    #question-container{
+        width: 60%;
+        height: 400px;
+        background-color: aquamarine;
+        border-radius: 25px;
+        color: whitesmoke;
+        display: flex;
+        flex-direction: column;
+    }
+    #container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .questions {
+        background-color: aquamarine;
+        width: auto;
+        color: cornsilk;
+    }
+    #buttons {
+        background-color: aquamarine;
+        display: flex;
+        flex-direction: column;
+        padding: 10px 20px 0px 10px;
+        justify-content: space-around;
+        
+    }
+    p{
+        padding: 20px;
+        margin-top: 30px;
+    }
+    .number{
+        background-color: blueviolet;
+        text-align: center;
+        font-size: 200px;
+        font-weight: bolder;
+        border-radius: 25px;
+    }
+    .op1,.op2,.op3,.op4 {
+        width: 30%;
+        height: 50px;
+        margin: 10px;
+        color: cornsilk;
+        
+    }
+    #submit{
+        position: relative;
+        left: 50%;
+        bottom: 40%;
+        width: 150px;
+        border-radius: 50px;
+        background-color: brown;
+    }
+    #navigation {
+        position:relative;
+        left: 50%;
+        bottom:60%;
+        width: 150px;
+        background-color: aquamarine;
+    }
+    .next,.prev {
+        width: 25%;
+        border-radius: 25px;
+        margin-top : 15px;
+        background-color: rgb(154,205,50);
+    }
+
+</style>
+<html>
+    <header>
+        <title>Quiz Game</title>
+    </header>
+    <body>
+        <h1>Today Quiz</h1>
+    <div id="container">
+        <div id="score">
+           <p>Your score:</p> 
+           <p class="number"></p>
+        </div>
+        <div id="question-container">
+            <p class="questions"></p>
+            <div id="buttons">
+            <button class="op1"></button>
+            <button class="op2"></button>
+            <button class="op3"></button>
+            <button class="op4"></button>
+            <div id="navigation">
+                <button class="prev"><svg fill='#9acd32' stroke='#0E1A27' stroke-width='3'
+                     stroke-dashoffset='185' stroke-dasharray='0' stroke-linecap='round' 
+                     stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+                     <circle cx="50" cy="50" r="40"/> <line x1="85" y1="50" x2="35" y2="50" /> <polyline 
+                    fill="none" points="50,30 35,50 50,70" /></svg></button>
+                <button class="next"><svg fill='#9acd32' stroke='#0E1A27' stroke-width='3' 
+                    stroke-dashoffset='185' stroke-dasharray='0' stroke-linecap='round' stroke-linejoin='round' 
+                    xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx="50" 
+                    cy="50" r="40"/> <line x1="85" y1="50" x2="35" y2="50" /> 
+                    <polyline fill="none" points="50,30 65,50 50,70" /></svg></button>
+                </div>
+            <button id="submit">submit</button> 
+        </div>  
+    </div>
+    </div>
+    <script>
+        var id = 0;
+        myQuestions = [
+            {
+                id: 1,
+                q: '1.what is capital city of india?',
+                a: {
+                    A: 'Delhi',
+                    B: 'Kolkata',
+                    C: 'Chennai',
+                    D: 'Hyderabad'
+                    },
+                answer : 'Delhi'
+            },
+            {
+                id: 2,
+                q: '2.what is the border state of telangana?',
+                a: {
+                    A: 'Andhra pradesh',
+                    B: 'Rajasthan',
+                    C: 'Kerala',
+                    D: 'Manipur'
+                    },
+                answer : 'Andhra pradesh'
+            },
+            {
+                id: 3,
+                q: '3.what is capital city of Tamilnadu?',
+                a: {
+                    A: 'Delhi',
+                    B: 'Kolkata',
+                    C: 'Chennai',
+                    D: 'Hyderabad'
+                    },
+                answer : 'Chennai'
+            },
+            {
+                id: 4,
+                q: '4.who chief minister of telangana?',
+                a: {
+                    A: 'Mamata benerjee',
+                    B: 'Aravind kejriwal',
+                    C: 'YS jagan mohan reddy',
+                    D: 'KCR'
+                    },
+                 answer : 'KCR'
+            }, {
+                id: 5,
+                q: '5.which is the following union territories?',
+                a: {
+                    A: 'Goa',
+                    B: 'Kolkata',
+                    C: 'Chennai',
+                    D: 'Hyderabad'
+                    },
+                 answer : 'Goa'
+            }, {
+                id: 6,
+                q: '6.what is capital city of Maharashtra?',
+                a: {
+                    A: 'Chennai',
+                    B: 'Kolkata',
+                    C: 'Mumbai',
+                    D: 'Hyderabad'
+                    },
+                 answer : 'Mumbai'
+            }, {
+                id: 7,
+                q: '7.where is red fort located?',
+                a: {
+                    A: 'Delhi',
+                    B: 'Kolkata',
+                    C: 'Chennai',
+                    D: 'Hyderabad'
+                },
+                 answer : 'Delhi'
+            },
+        ]
+        function iterate(id) {
+        const op1 = document.getElementsByClassName("op1");
+        const op2 = document.getElementsByClassName("op2");
+        const op3 = document.getElementsByClassName("op3");
+        const op4 = document.getElementsByClassName("op4");
+            const ques = document.getElementsByClassName("questions")[0];
+            ques.innerHTML= myQuestions[id].q;
+            op1[0].innerHTML = myQuestions[id].a.A;
+            op2[0].innerHTML = myQuestions[id].a.B;
+            op3[0].innerHTML = myQuestions[id].a.C;
+            op4[0].innerHTML = myQuestions[id].a.D;
+            var opted = '';
+            op1.addEventListener('click',()=>
+            {
+                op1.style.backgroundColor= 'aquamarine';
+                op2.style.backgroundColor='blueviolet';
+                op3.style.backgroundColor='blueviolet';
+                op4.style.backgroundColor='blueviolet';
+                opted += op1;
+            });
+            op2.addEventListener('click',()=>
+            {
+                op1.style.backgroundColor='blueviolet';
+                op2.style.backgroundColor = 'aquamarine';
+                op3.style.backgroundColor='blueviolet';
+                op4.style.backgroundColor='blueviolet';
+                opted += op2;
+            });
+            op3.addEventListener('click',()=>
+            {
+                op1.style.backgroundColor='blueviolet';
+                op2.style.backgroundColor='blueviolet';
+                op3.style.backgroundColor = 'aquamarine';
+                op4.style.backgroundColor='blueviolet';
+                opted += op3;
+            });
+            op4.addEventListener('click',()=>
+            {
+                op1.style.backgroundColor='blueviolet';
+                op2.style.backgroundColor='blueviolet';
+                op3.style.backgroundColor='blueviolet';
+                op4.style.backgroundColor = 'aquamarine';
+                opted += op4;
+            });
+            const score= 0;
+            submit.addEventListener('click', ()=> {
+                if(opted === myQuestions[id].answer){
+                    score++;
+                } else {
+                    score--;
+                }
+            })
+            document.getElementsByClassName('number')[0].innerHTML= score;
+        }
+            if(id >= 0) {
+                iterate(0);
+            }
+        const next = document.getElementsByClassName('next')[0];
+        next.addEventListener('click',()=>{
+            if(id >= 1 && id <= myQuestions.length - 1) {
+                id++;
+                iterate(id);
+                console.log(id);
+            } else {
+                $('button').removeClass('next');
+            }
+        })    
+        const prev = document.getElementsByClassName('prev')[0];
+        prev.addEventListener('click', () => {
+            if(id > 1 && id <= myQuestions.length - 1) {
+                id--;
+                iterate(id);
+                console.log(id);
+            } else {
+                $('button').removeClass('prev');
+            }
+        })
+    </script>
+    </body>
+</html>
+
